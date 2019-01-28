@@ -1,0 +1,204 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Income Calculator" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.Resources>
+        <ControlTemplate x:Key="RoundTextboxCornerTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}"   
+         x:Name="Bd" BorderBrush="Black"  
+         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid
+        Background="DarkGray"
+        >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label
+            Content="Income Calculator"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            Background="DarkGray"
+            VerticalAlignment="Center"
+            FontSize="16"/>
+        <StackPanel
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                >
+            <RadioButton 
+                    x:Name="RadioButton_USD"
+                    Content="USD"
+                    Margin="5"
+                    Foreground="blue"
+                    IsChecked="True" Checked="currencyCheck"
+                    />
+            <RadioButton 
+                    x:Name="RadioButton_EURO"
+                    Foreground="blue"
+                    Content="EURO"
+                    Margin="5"
+                    IsChecked="True" Checked="currencyCheck"
+                    />
+        </StackPanel>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="DarkGray"
+            >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+              x:Name="Label_Income"
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="Wage (i.e 0.00)"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Padding="0,0,10,10"
+                FontSize="20"
+                Background="DarkGray"
+                />
+            <TextBox 
+               x:Name="TextBox_incomeVariable"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="100"
+                Height="25"
+                Padding="5,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                Template="{StaticResource RoundTextboxCornerTemplate}" 
+                />
+            <Label 
+                x:Name="Label_Hours"
+                 Grid.Row="1"
+                Grid.Column="0"
+                Content="Hours (Weekly)"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Padding="0,0,10,10"
+                FontSize="20"
+                Background="DarkGray"
+                />
+            <TextBox 
+               x:Name="TextBox_hoursVariable"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="100"
+                Height="25"
+                Padding="5,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                Template="{StaticResource RoundTextboxCornerTemplate}" 
+                />
+
+            <Label
+                x:Name="Label_incomeResult"
+                Grid.Row="4"
+                Grid.Column="0"
+                Content="Income:"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Padding="0,0,10,10"
+                FontSize="20"/>
+            <ComboBox x:Name="ComboBox_Shape" 
+                      Grid.Row="2"
+                      Grid.Column="0"
+                      Width="150"
+                      Height="30"
+                      VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Yearly"/>
+                <ComboBoxItem Content="Monthly"/>
+            </ComboBox>
+            <Button 
+                Name="Button_Calculate"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="100"
+                Height="30"
+                Content="Calculate"
+                HorizontalAlignment="Left"
+                Foreground="Black"
+                Background="Gray"
+                Click="Button_Calculate_Click"
+                />
+            <TextBox
+                x:Name="TextBox_incomeResultVariable"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="100"
+                Height="25" 
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                IsReadOnly="True"  
+                Template="{StaticResource RoundTextboxCornerTemplate}"
+                />
+        </Grid>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Orientation="Vertical"
+            >
+            <Button
+                x:Name="Button_Help"
+                Content="Help"
+                Width="75"
+                Height="30"
+                FontSize="16" Click="Button_Help_Click"
+            Foreground="Black"
+                Background="gray"
+               />
+            <Button
+                x:Name="Button_Exit"
+                Content="Exit"
+                Margin="20"
+                Width="75"
+                Height="30"
+                FontSize="16" Click="Button_Exit_Click"
+                Foreground="Black"
+                Background="Gray"
+               />
+            <Image Height="117" Margin="10,0" Source="currencyPicture.jpg" Stretch="Fill"/>
+        </StackPanel>
+    </Grid>
+</Window>
