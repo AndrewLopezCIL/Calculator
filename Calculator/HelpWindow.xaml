@@ -8,17 +8,12 @@
         Title="HelpWindow" Height="300" Width="300">
     <StackPanel>
         <TextBlock
-            Text="Choose your currency type,"
+            Text="Pick a conversion type, enter a number"
             HorizontalAlignment="Center" 
             TextAlignment="Center"
-            Height="23" Margin="59,0,58,0"/>
-        <TextBlock
-            Text="enter your information, click calculate, and done! "
-            HorizontalAlignment="Center" 
-            TextAlignment="Center"
-            Height="28" />
+            Height="22" Margin="44,0" />
         <TextBlock 
-            Text="It's that easy."
+            Text="then click calculate. It's that easy."
             HorizontalAlignment="Center"
             Height="28"
             />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Income Calculator" Height="350" Width="525"
+        Title="Conversion Calculator" Height="350" Width="525"
         WindowStartupLocation="CenterScreen"
         >
     <Window.Resources>
@@ -41,13 +41,15 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Label
-            Content="Income Calculator"
+            Content="Weight Conversion Calculator"
             Grid.Row="0"
             Grid.Column="0"
             HorizontalAlignment="Center"
             Background="DarkGray"
             VerticalAlignment="Center"
-            FontSize="16"/>
+            FontSize="16"
+            FontWeight="Bold"
+            />
         <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
@@ -55,18 +57,18 @@
                 VerticalAlignment="Center"
                 >
             <RadioButton 
-                    x:Name="RadioButton_USD"
-                    Content="USD"
+                    x:Name="RadioButton_Kilograms"
+                    Content="Kilograms"
                     Margin="5"
-                    Foreground="blue"
-                    IsChecked="True" Checked="currencyCheck"
+                    Foreground="black"
+                    IsChecked="True" 
                     />
             <RadioButton 
-                    x:Name="RadioButton_EURO"
-                    Foreground="blue"
-                    Content="EURO"
+                    x:Name="RadioButton_LBS"
+                    Foreground="Black"
+                    Content="LBS"
                     Margin="5"
-                    IsChecked="True" Checked="currencyCheck"
+                    IsChecked="True"
                     />
         </StackPanel>
         <Grid
@@ -88,10 +90,10 @@
             </Grid.ColumnDefinitions>
 
             <Label
-              x:Name="Label_Income"
-                Grid.Row="0"
+              x:Name="Label_Weight"
+                Grid.Row="1"
                 Grid.Column="0"
-                Content="Wage (i.e 0.00)"
+                Content="Weight-To-Convert"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Padding="0,0,10,10"
@@ -99,29 +101,7 @@
                 Background="DarkGray"
                 />
             <TextBox 
-               x:Name="TextBox_incomeVariable"
-                Grid.Row="0"
-                Grid.Column="1"
-                Width="100"
-                Height="25"
-                Padding="5,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                Template="{StaticResource RoundTextboxCornerTemplate}" 
-                />
-            <Label 
-                x:Name="Label_Hours"
-                 Grid.Row="1"
-                Grid.Column="0"
-                Content="Hours (Weekly)"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Padding="0,0,10,10"
-                FontSize="20"
-                Background="DarkGray"
-                />
-            <TextBox 
-               x:Name="TextBox_hoursVariable"
+               x:Name="TextBox_WeightToConvert"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="100"
@@ -133,23 +113,14 @@
                 />
 
             <Label
-                x:Name="Label_incomeResult"
+                x:Name="Label_ConvertedWeight"
                 Grid.Row="4"
                 Grid.Column="0"
-                Content="Income:"
+                Content="Weight:"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Padding="0,0,10,10"
                 FontSize="20"/>
-            <ComboBox x:Name="ComboBox_Shape" 
-                      Grid.Row="2"
-                      Grid.Column="0"
-                      Width="150"
-                      Height="30"
-                      VerticalContentAlignment="Center">
-                <ComboBoxItem Content="Yearly"/>
-                <ComboBoxItem Content="Monthly"/>
-            </ComboBox>
             <Button 
                 Name="Button_Calculate"
                 Grid.Row="2"
@@ -163,7 +134,7 @@
                 Click="Button_Calculate_Click"
                 />
             <TextBox
-                x:Name="TextBox_incomeResultVariable"
+                x:Name="TextBox_WeightConverted"
                 Grid.Row="4"
                 Grid.Column="1"
                 Width="100"
@@ -198,7 +169,6 @@
                 Foreground="Black"
                 Background="Gray"
                />
-            <Image Height="117" Margin="10,0" Source="currencyPicture.jpg" Stretch="Fill"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -19,11 +19,22 @@ namespace Calculator
     /// </summary>
     public partial class SolutionWindow : Window
     {
-        public SolutionWindow(double conversion, string currencyType)
+        public SolutionWindow(double conversion, string conversionType)
         {
-            InitializeComponent(); 
+            InitializeComponent();
 
-            Label_Conversion.Content = currencyType + conversion;
+            if (conversionType == "kg")
+            {
+                Label_Conversion.Content = conversion * 2.205;
+            }
+            else if (conversionType == "lbs")
+            {
+                Label_Conversion.Content = conversion / 2.205;
+            } 
+            else
+            {
+                Label_Conversion.Content = "Error...";
+            }
         }
 
         private void Button_Close_Click(object sender, RoutedEventArgs e)

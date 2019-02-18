@@ -19,8 +19,7 @@ namespace Calculator
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-       static string currencyType = "";
+    { 
         public MainWindow()
         {
 
@@ -32,9 +31,8 @@ namespace Calculator
         {
 
            
-            TextBox_incomeVariable.Focus();
+            TextBox_WeightToConvert.Focus();
 
-            updateCurrency();
 
         }
 
@@ -44,32 +42,31 @@ namespace Calculator
         }
         private void Button_Calculate_Click(object sender, RoutedEventArgs e)
         {
-            double income = 0;
-            string timeOfincome; 
-
+            double weight = 0;
             
+            string typeOfConversion = "";
+
+
+
+
             if (validateInputs())
             {
-                
+              double.TryParse(TextBox_WeightToConvert.Text, out weight);
+                if (RadioButton_Kilograms.IsChecked == true)
+                {
+                    typeOfConversion = "kg";
+                    weight = weight * 2.205;
+                    TextBox_WeightConverted.Text = weight.ToString();
+                }
+                else if (RadioButton_LBS.IsChecked == true)
+                {
+                    typeOfConversion = "lbs";
+                    weight = weight / 2.205;
+                    TextBox_WeightConverted.Text = weight.ToString();
 
-                timeOfincome = ComboBox_Shape.SelectionBoxItem as string;
+                }
 
-                    switch (timeOfincome)
-                    {
-                        case "Yearly":
-                        income = double.Parse(TextBox_incomeVariable.Text) * double.Parse(TextBox_hoursVariable.Text) * 52.14;
-                        break; 
-                        case "Monthly":
-                        income = double.Parse(TextBox_incomeVariable.Text) * double.Parse(TextBox_hoursVariable.Text) * 4;
-                            break;
-                        default:
-                        income = double.Parse(TextBox_incomeVariable.Text) * double.Parse(TextBox_hoursVariable.Text);
-                            break;
-                    }
-               
-
-                TextBox_incomeResultVariable.Text = income.ToString();
-                SolutionWindow solutionWindow = new SolutionWindow(income, currencyType);
+                SolutionWindow solutionWindow = new SolutionWindow(weight, typeOfConversion);
 
                 solutionWindow.ShowDialog();
             }
@@ -80,9 +77,7 @@ namespace Calculator
         {
             bool validInputs = true;
             if (
-                !double.TryParse(TextBox_incomeVariable.Text, out double length)
-                || 
-                !double.TryParse(TextBox_hoursVariable.Text, out double width) 
+                !double.TryParse(TextBox_WeightToConvert.Text, out double length) 
                 )
             {
                 MessageBox.Show("Please enter in decimal format.");
@@ -99,32 +94,11 @@ namespace Calculator
              
         }
             private void ResetInputs()
-        {
-            TextBox_hoursVariable.Text = "";
-            TextBox_incomeVariable.Text = "";
-            TextBox_incomeResultVariable.Text = "";
-            TextBox_hoursVariable.Focus();
+        { 
+            TextBox_WeightConverted.Text = "";
+            TextBox_WeightToConvert.Text = "";
+            TextBox_WeightToConvert.Focus();
         }
-        private void currencyCheck(object sender, RoutedEventArgs e)
-        {
-            if (IsLoaded)
-            {
-                updateCurrency();
-            }
-        }
-        private void updateCurrency()
-        {
-            if ((bool)RadioButton_USD.IsChecked)
-            {
-                Label_incomeResult.Content = "Income (USD):";
-                currencyType = "$";
-            }
-            else if ((bool)RadioButton_EURO.IsChecked)
-            {
-                Label_incomeResult.Content = "Income (EURO):";
-                currencyType = "€";
-            } 
-        }
-         
+      
     }
 }
